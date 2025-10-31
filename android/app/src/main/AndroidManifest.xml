@@ -1,4 +1,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android">
+<!--    <meta-data android:name="com.google.android.geo.API_KEY"-->
+<!--        android:value="AlzaSyC1ZNN-Ih54Pp1qHxhFNypYulFE570_Sxg"/>-->
     <application
         android:label="events"
         android:name="${applicationName}"

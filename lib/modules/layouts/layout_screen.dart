@@ -3,6 +3,7 @@ import 'package:events/modules/layouts/fav_screen.dart';
 import 'package:events/modules/layouts/home_screen.dart';
 import 'package:events/modules/layouts/map_screen.dart';
 import 'package:events/modules/layouts/profile_screen.dart';
+import 'package:events/modules/routes/app_routes_name.dart';
 import 'package:flutter/material.dart';
 
 class LayoutScreen extends StatefulWidget {
@@ -17,7 +18,7 @@ class _LayoutScreenState extends State<LayoutScreen> {
   List<Widget> screens = [
     HomeScreen(),
     MapScreen(),
-    FavScreen(),
+    FavScreen(favoriteEvents: [],),
     ProfileScreen(),
   ];
   @override
@@ -26,7 +27,9 @@ class _LayoutScreenState extends State<LayoutScreen> {
       body: screens[selectedIndex],
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
       floatingActionButton: FloatingActionButton(
-        onPressed: () {},
+        onPressed: () {
+          Navigator.pushNamed(context,AppRoutesName.creatEvent);
+        },
         elevation: 0,
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(360),
         side: BorderSide(color: Colors.white,width: 3)

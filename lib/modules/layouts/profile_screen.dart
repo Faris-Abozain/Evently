@@ -1,9 +1,10 @@
 import 'package:events/core/app_colors.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
 class ProfileScreen extends StatelessWidget {
-  const ProfileScreen({super.key});
-
+   ProfileScreen({super.key});
+  final user=FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -39,13 +40,13 @@ class ProfileScreen extends StatelessWidget {
                     Column(
                       children: [
                         Text(
-                          "Faris AboZain",
+                          "${user!.displayName!}",
                           style: TextStyle(
                               fontSize: 24,
                               fontWeight: FontWeight.w700,
                               color: Colors.white),
                         ),
-                        Text("farisabozein@gmail.com",
+                        Text(user!.email!,
                             style: TextStyle(fontSize: 16, color: Colors.white))
                       ],
                     )
@@ -96,20 +97,23 @@ class ProfileScreen extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 220,),
-              Container(
-                height: 40,
-                width: double.infinity,
-                decoration: BoxDecoration(
-                  color: Colors.red,
-                  borderRadius: BorderRadius.circular(16),
-                ),
-                child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Row(
-                    children: [
-                      Icon(Icons.logout,color: Colors.white,),
-                      Text("Log Out",style: TextStyle(fontSize: 16,color: Colors.white),)
-                    ],
+              InkWell(
+                onTap: logOut,
+                child: Container(
+                  height: 40,
+                  width: double.infinity,
+                  decoration: BoxDecoration(
+                    color: Colors.red,
+                    borderRadius: BorderRadius.circular(16),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Row(
+                      children: [
+                        Icon(Icons.logout,color: Colors.white,),
+                        Text("Log Out",style: TextStyle(fontSize: 16,color: Colors.white),)
+                      ],
+                    ),
                   ),
                 ),
               )
@@ -118,5 +122,8 @@ class ProfileScreen extends StatelessWidget {
         ],
       ),
     );
+  }
+  void logOut() async{
+    await FirebaseAuth.instance.signOut();
   }
 }
